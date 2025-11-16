@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Menu, X, ExternalLink } from "lucide-react"
+import { Menu, X, ExternalLink, Sun, Moon, Monitor } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useTheme } from "next-themes"
 
 const navItems = [
   { name: "About", href: "#about" },
@@ -16,6 +17,12 @@ const navItems = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,15 +32,44 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const currentTheme = mounted ? (resolvedTheme || theme) : 'dark'
+  const logoSrc = currentTheme === 'dark' ? '/logo-light.png' : '/logo.png'
+
+  const cycleTheme = () => {
+    if (theme === 'system') {
+      setTheme('light')
+    } else if (theme === 'light') {
+      setTheme('dark')
+    } else {
+      setTheme('system')
+    }
+  }
+
+  const getThemeIcon = () => {
+    if (!mounted) return Monitor
+
+    switch (theme) {
+      case 'light':
+        return Sun
+      case 'dark':
+        return Moon
+      case 'system':
+      default:
+        return Monitor
+    }
+  }
+
+  const ThemeIcon = getThemeIcon()
+
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm"
-          : "bg-transparent"
+          ? "bg-background/80 backdrop-blur-md border-border shadow-sm"
+          : "bg-transparent border-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,7 +81,7 @@ export function Navigation() {
             whileTap={{ scale: 0.95 }}
           >
             <img
-              src="/logo.png"
+              src={logoSrc}
               alt="Saai Vignesh"
               className="h-10 w-auto"
             />
@@ -57,7 +93,7 @@ export function Navigation() {
               <motion.a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-muted px-3 py-2 rounded-lg transition-all"
+                className="text-sm font-mono font-medium text-foreground/70 hover:text-foreground hover:bg-muted px-3 py-2 rounded-lg transition-all"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -67,12 +103,12 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* CTA Button - Right Side */}
+          {/* Right Side Buttons */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: navItems.length * 0.1 }}
-            className="hidden md:block absolute right-0"
+            className="hidden md:flex items-center gap-2 absolute right-0"
           >
             <a
               href="/resume.pdf"
@@ -83,6 +119,13 @@ export function Navigation() {
               View Resume
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
+            <button
+              onClick={cycleTheme}
+              className="inline-flex items-center justify-center h-9 w-9 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
+              aria-label="Toggle theme"
+            >
+              <ThemeIcon className="h-4 w-4" />
+            </button>
           </motion.div>
 
           {/* Mobile Menu Button */}
@@ -106,21 +149,30 @@ export function Navigation() {
               <a
                 key={item.name}
                 href={item.href}
-                className="block py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                className="block py-2 text-sm font-mono font-medium text-foreground/80 hover:text-foreground transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
               </a>
             ))}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full h-9 px-4 mt-4 rounded-lg bg-primary text-primary-foreground text-sm font-medium shadow-sm hover:bg-primary/90 hover:shadow-md transition-all"
-            >
-              View Resume
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
+            <div className="flex gap-2 mt-4">
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 flex-1 h-9 px-4 rounded-lg bg-primary text-primary-foreground text-sm font-medium shadow-sm hover:bg-primary/90 hover:shadow-md transition-all"
+              >
+                View Resume
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+              <button
+                onClick={cycleTheme}
+                className="inline-flex items-center justify-center h-9 w-9 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
+                aria-label="Toggle theme"
+              >
+                <ThemeIcon className="h-4 w-4" />
+              </button>
+            </div>
           </motion.div>
         )}
       </div>

@@ -127,7 +127,7 @@ export function Hero() {
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg border-2 border-foreground/60 bg-primary/10 text-foreground text-base font-medium hover:bg-white hover:border-foreground/60 transition-all whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg border-2 border-border bg-muted text-foreground text-base font-medium hover:bg-muted/80 hover:border-border transition-all whitespace-nowrap"
               >
                 Contact Me
               </a>
@@ -170,7 +170,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="relative hidden lg:flex items-center justify-center"
           >
-            <div className="relative w-60 h-60">
+            <div className="relative w-80 h-[400px]">
               <motion.div
                 animate={{
                   y: [0, -20, 0],
@@ -180,9 +180,9 @@ export function Hero() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-blue-600/20 blur-3xl"
+                className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/20 to-blue-600/20 blur-3xl"
               />
-              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl">
+              <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
                 <img
                   src="/profile-photo.jpg"
                   alt="Saai Vignesh"

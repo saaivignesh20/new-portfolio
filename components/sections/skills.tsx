@@ -5,62 +5,82 @@ import { motion } from "framer-motion"
 const skillCategories = [
   {
     category: "Frontend",
-    color: "from-blue-500 to-cyan-500",
+    gradientColor: "from-blue-500 to-cyan-500",
+    textColor: "text-blue-500",
+    borderColor: "border-blue-500/30",
+    bgColor: "bg-blue-500/10",
+    hoverBg: "hover:bg-blue-500/20",
     skills: [
-      { name: "HTML5", level: 95 },
-      { name: "CSS3", level: 95 },
-      { name: "JavaScript", level: 95 },
-      { name: "Angular", level: 90 },
-      { name: "React", level: 90 },
-      { name: "TypeScript", level: 90 },
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Angular",
+      "React",
+      "TypeScript",
     ],
   },
   {
     category: "Backend",
-    color: "from-green-500 to-emerald-500",
+    gradientColor: "from-green-500 to-emerald-500",
+    textColor: "text-green-500",
+    borderColor: "border-green-500/30",
+    bgColor: "bg-green-500/10",
+    hoverBg: "hover:bg-green-500/20",
     skills: [
-      { name: "Node.js", level: 95 },
-      { name: "Express.js", level: 90 },
-      { name: "NestJS", level: 90 },
-      { name: "MongoDB", level: 85 },
-      { name: "PostgreSQL", level: 85 },
-      { name: "REST APIs", level: 95 },
+      "Node.js",
+      "Express.js",
+      "NestJS",
+      "MongoDB",
+      "PostgreSQL",
+      "REST APIs",
     ],
   },
   {
     category: "Cloud & Tools",
-    color: "from-purple-500 to-pink-500",
+    gradientColor: "from-purple-500 to-pink-500",
+    textColor: "text-purple-500",
+    borderColor: "border-purple-500/30",
+    bgColor: "bg-purple-500/10",
+    hoverBg: "hover:bg-purple-500/20",
     skills: [
-      { name: "AWS", level: 85 },
-      { name: "Firebase", level: 80 },
-      { name: "Auth0", level: 75 },
-      { name: "Figma", level: 75 },
-      { name: "Git", level: 95 },
-      { name: "Docker", level: 80 },
+      "AWS",
+      "Firebase",
+      "Auth0",
+      "Figma",
+      "Git",
+      "Docker",
     ],
   },
   {
     category: "AI & Python",
-    color: "from-orange-500 to-red-500",
+    gradientColor: "from-orange-500 to-red-500",
+    textColor: "text-orange-500",
+    borderColor: "border-orange-500/30",
+    bgColor: "bg-orange-500/10",
+    hoverBg: "hover:bg-orange-500/20",
     skills: [
-      { name: "Python", level: 85 },
-      { name: "ChatGPT API", level: 80 },
-      { name: "Groq API", level: 75 },
-      { name: "Streamlit", level: 75 },
-      { name: "Machine Learning", level: 70 },
-      { name: "Data Analysis", level: 75 },
+      "Python",
+      "ChatGPT API",
+      "Groq API",
+      "Streamlit",
+      "Machine Learning",
+      "Data Analysis",
     ],
   },
   {
     category: "Architecture",
-    color: "from-yellow-500 to-amber-500",
+    gradientColor: "from-yellow-500 to-amber-500",
+    textColor: "text-yellow-500",
+    borderColor: "border-yellow-500/30",
+    bgColor: "bg-yellow-500/10",
+    hoverBg: "hover:bg-yellow-500/20",
     skills: [
-      { name: "System Design", level: 85 },
-      { name: "Microservices", level: 80 },
-      { name: "IoT Solutions", level: 75 },
-      { name: "Scalable APIs", level: 90 },
-      { name: "Database Design", level: 85 },
-      { name: "Cloud Architecture", level: 80 },
+      "System Design",
+      "Microservices",
+      "IoT Solutions",
+      "Scalable APIs",
+      "Database Design",
+      "Cloud Architecture",
     ],
   },
 ]
@@ -99,42 +119,25 @@ export function Skills() {
             >
               <div className="mb-6">
                 <div
-                  className={`inline-block px-3 py-1 rounded-full bg-gradient-to-r ${category.color} text-white text-xs font-mono font-semibold mb-3`}
+                  className={`inline-block px-3 py-1 rounded-full bg-gradient-to-r ${category.gradientColor} text-white text-xs font-mono font-semibold mb-3`}
                 >
                   {category.category.toUpperCase()}
                 </div>
                 <h3 className="text-xl font-bold">{category.category}</h3>
               </div>
 
-              <div className="space-y-4">
+              <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                  <motion.span
+                    key={skill}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: categoryIndex * 0.1 + skillIndex * 0.05 }}
+                    className={`px-4 py-2 rounded-full border ${category.bgColor} ${category.borderColor} ${category.textColor} ${category.hoverBg} text-sm font-mono font-medium transition-all hover:scale-105`}
                   >
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium">{skill.name}</span>
-                      <span className="text-xs font-mono text-muted-foreground">
-                        {skill.level}%
-                      </span>
-                    </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{
-                          delay: categoryIndex * 0.1 + skillIndex * 0.05 + 0.2,
-                          duration: 0.8,
-                          ease: "easeOut",
-                        }}
-                        className={`h-full bg-gradient-to-r ${category.color}`}
-                      />
-                    </div>
-                  </motion.div>
+                    {skill}
+                  </motion.span>
                 ))}
               </div>
             </motion.div>
