@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { OverlayScrollbarsWrapper } from "@/components/overlay-scrollbars-wrapper"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,7 +38,9 @@ export default function RootLayout({
           enableSystem={true}
           disableTransitionOnChange
         >
-          {children}
+          <OverlayScrollbarsWrapper>
+            {children}
+          </OverlayScrollbarsWrapper>
         </ThemeProvider>
       </body>
     </html>

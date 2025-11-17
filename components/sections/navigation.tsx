@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { Menu, X, ExternalLink, Sun, Moon, Monitor } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useTheme } from "next-themes"
+import { motion } from "framer-motion";
+import { ExternalLink, Menu, Monitor, Moon, Sun, X } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { name: "About", href: "#about" },
@@ -12,54 +11,67 @@ const navItems = [
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
-]
+];
 
 export function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { theme, setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    const handleScroll = (e: Event) => {
+      console.log("Scroll event:", e);
+      if (e instanceof CustomEvent) {
+        // Handle custom osScroll event from OverlayScrollbarsWrapper
+        setIsScrolled(e.detail.scrollTop > 20);
+      } else {
+        // Fallback to window scroll
+        setIsScrolled(window.scrollY > 20);
+      }
+    };
 
-  const currentTheme = mounted ? (resolvedTheme || theme) : 'dark'
-  const logoSrc = currentTheme === 'dark' ? '/logo-light.png' : '/logo.png'
+    // Listen to custom osScroll event
+    window.addEventListener("osScroll", handleScroll as EventListener);
+    // Also listen to regular scroll as fallback
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("osScroll", handleScroll as EventListener);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const currentTheme = mounted ? resolvedTheme || theme : "dark";
+  const logoSrc = currentTheme === "dark" ? "/logo-light.png" : "/logo.png";
 
   const cycleTheme = () => {
-    if (theme === 'system') {
-      setTheme('light')
-    } else if (theme === 'light') {
-      setTheme('dark')
+    if (theme === "system") {
+      setTheme("light");
+    } else if (theme === "light") {
+      setTheme("dark");
     } else {
-      setTheme('system')
+      setTheme("system");
     }
-  }
+  };
 
-  const getThemeIcon = () => {
-    if (!mounted) return Monitor
+  const renderThemeIcon = () => {
+    if (!mounted) return <Monitor className="h-4 w-4" />;
 
     switch (theme) {
-      case 'light':
-        return Sun
-      case 'dark':
-        return Moon
-      case 'system':
+      case "light":
+        return <Sun className="h-4 w-4" />;
+      case "dark":
+        return <Moon className="h-4 w-4" />;
+      case "system":
       default:
-        return Monitor
+        return <Monitor className="h-4 w-4" />;
     }
-  }
-
-  const ThemeIcon = getThemeIcon()
+  };
 
   return (
     <motion.nav
@@ -68,7 +80,7 @@ export function Navigation() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-border shadow-sm"
+          ? "bg-background/95 backdrop-blur-xl border-border shadow-sm"
           : "bg-transparent border-transparent"
       }`}
     >
@@ -80,11 +92,7 @@ export function Navigation() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <img
-              src={logoSrc}
-              alt="Saai Vignesh"
-              className="h-10 w-auto"
-            />
+            <img src={logoSrc} alt="Saai Vignesh" className="h-10 w-auto" />
           </motion.a>
 
           {/* Desktop Navigation - Centered */}
@@ -124,7 +132,7 @@ export function Navigation() {
               className="inline-flex items-center justify-center h-9 w-9 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
               aria-label="Toggle theme"
             >
-              <ThemeIcon className="h-4 w-4" />
+              {renderThemeIcon()}
             </button>
           </motion.div>
 
@@ -170,12 +178,12 @@ export function Navigation() {
                 className="inline-flex items-center justify-center h-9 w-9 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
                 aria-label="Toggle theme"
               >
-                <ThemeIcon className="h-4 w-4" />
+                {renderThemeIcon()}
               </button>
             </div>
           </motion.div>
         )}
       </div>
     </motion.nav>
-  )
+  );
 }
