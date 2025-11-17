@@ -176,7 +176,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     )}
                   </div>
 
-                  {/* Right Column - Description (Scrollable) */}
+                  {/* Right Column - Description (Scrollable if overflow) */}
                   <OverlayScrollbarsComponent
                     options={{
                       scrollbars: {
@@ -184,6 +184,10 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                         autoHideDelay: 800,
                         // Dark mode uses light scrollbars, light mode uses dark scrollbars
                         theme: currentTheme === "dark" ? "os-theme-light" : "os-theme-dark",
+                      },
+                      overflow: {
+                        x: "hidden",
+                        y: "scroll",
                       },
                     }}
                     defer

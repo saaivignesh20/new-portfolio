@@ -120,14 +120,14 @@ export function Hero() {
             >
               <a
                 href="#projects"
-                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg bg-primary text-primary-foreground text-base font-medium shadow-sm hover:bg-primary/90 hover:shadow-md transition-all whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg bg-primary text-primary-foreground text-base font-medium shadow-[0_4px_0_0_rgba(37,99,235,0.3)] hover:bg-primary/90 hover:shadow-[0_6px_0_0_rgba(37,99,235,0.3)] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_1px_0_0_rgba(37,99,235,0.3)] active:scale-[0.97] transition-all whitespace-nowrap"
               >
                 View My Work
                 <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg border-2 border-border bg-muted text-foreground text-base font-medium hover:bg-muted/80 hover:border-border transition-all whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg border-2 border-primary/20 bg-transparent text-foreground text-base font-medium shadow-[0_4px_0_0_rgba(37,99,235,0.15)] hover:bg-primary/5 hover:border-primary/30 hover:shadow-[0_6px_0_0_rgba(37,99,235,0.15)] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_1px_0_0_rgba(37,99,235,0.15)] active:scale-[0.97] transition-all whitespace-nowrap"
               >
                 Contact Me
               </a>
@@ -168,9 +168,9 @@ export function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative hidden lg:flex items-center justify-center"
+            className="relative flex items-center justify-center"
           >
-            <div className="relative w-80 h-[400px]">
+            <div className="relative w-64 h-80 sm:w-72 sm:h-[360px] lg:w-80 lg:h-[400px]">
               <motion.div
                 animate={{
                   y: [0, -20, 0],

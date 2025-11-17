@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { useState } from "react"
 
 const contactInfo = [
   {
@@ -36,10 +37,38 @@ const socialLinks = [
 ]
 
 export function Contact() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Add form submission logic here
-    console.log("Form submitted")
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/saaivigneshpremanand@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(Object.fromEntries(formData))
+      })
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        form.reset()
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -166,6 +195,10 @@ export function Contact() {
             <Card>
               <CardContent className="p-6">
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Hidden fields for FormSubmit configuration */}
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_template" value="table" />
+
                   <div>
                     <label
                       htmlFor="name"
@@ -175,9 +208,11 @@ export function Contact() {
                     </label>
                     <Input
                       id="name"
+                      name="name"
                       placeholder="Your name"
                       required
                       className="w-full"
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -190,10 +225,12 @@ export function Contact() {
                     </label>
                     <Input
                       id="email"
+                      name="email"
                       type="email"
                       placeholder="your.email@example.com"
                       required
                       className="w-full"
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -206,9 +243,11 @@ export function Contact() {
                     </label>
                     <Input
                       id="subject"
+                      name="_subject"
                       placeholder="Project inquiry"
                       required
                       className="w-full"
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -221,14 +260,41 @@ export function Contact() {
                     </label>
                     <Textarea
                       id="message"
+                      name="message"
                       placeholder="Tell me about your project..."
                       required
                       className="w-full min-h-[150px]"
+                      disabled={isSubmitting}
                     />
                   </div>
 
-                  <Button type="submit" className="w-full" size="lg">
-                    Send Message
+                  {submitStatus === 'success' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 text-sm"
+                    >
+                      Thanks for reaching out! I&apos;ll get back to you soon.
+                    </motion.div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm"
+                    >
+                      Oops! Something went wrong. Please try again or email me directly.
+                    </motion.div>
+                  )}
+
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    size="lg"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </CardContent>

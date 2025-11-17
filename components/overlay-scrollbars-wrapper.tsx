@@ -32,9 +32,19 @@ export function OverlayScrollbarsWrapper({ children }: OverlayScrollbarsWrapperP
 
     viewport.addEventListener("scroll", handleScroll);
 
+    // Expose scroll function globally for navigation
+    (window as any).scrollToPosition = (position: number | { top: number; behavior?: ScrollBehavior }) => {
+      if (typeof position === 'number') {
+        viewport.scrollTo({ top: position, behavior: 'smooth' });
+      } else {
+        viewport.scrollTo(position);
+      }
+    };
+
     // Store cleanup function
     return () => {
       viewport.removeEventListener("scroll", handleScroll);
+      delete (window as any).scrollToPosition;
     };
   };
 
@@ -51,6 +61,10 @@ export function OverlayScrollbarsWrapper({ children }: OverlayScrollbarsWrapperP
           autoHideDelay: 1000,
           // Dark mode uses light scrollbars, light mode uses dark scrollbars
           theme: currentTheme === "dark" ? "os-theme-light" : "os-theme-dark",
+        },
+        overflow: {
+          x: "hidden",
+          y: "scroll",
         },
       }}
       events={{

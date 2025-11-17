@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,10 +9,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ProjectModal } from "@/components/ui/project-modal";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
-import { ProjectModal } from "@/components/ui/project-modal";
+import { useState } from "react";
 
 const projects = [
   {
@@ -46,7 +46,7 @@ const projects = [
     fullDescription: [
       "TinkerPad is a powerful ChatGPT-4o powered conversational document summarizer designed to process PDFs, Excel files, and Word documents. Built as an end-to-end system during the Luddy Hackathon 2024, this intelligent tool transforms the way users interact with and understand document content.",
       "The system leverages Groq's lightning-fast inference API and Google's Gemma 2 language model to provide rapid document analysis. Users can upload various document formats and engage in natural language conversations about the content, receiving concise summaries and intelligent follow-up questions that help explore the document more deeply.",
-      "Key features include multi-format document support (PDF, Excel, Word, images), OCR capabilities for image-based text extraction, conversational memory for contextual follow-up questions, and a user-friendly Streamlit interface. Additionally, the project includes a Chrome extension called \"OverTinker\" that extends document summarization capabilities directly to web browsing.",
+      'Key features include multi-format document support (PDF, Excel, Word, images), OCR capabilities for image-based text extraction, conversational memory for contextual follow-up questions, and a user-friendly Streamlit interface. Additionally, the project includes a Chrome extension called "OverTinker" that extends document summarization capabilities directly to web browsing.',
       "Perfect for students analyzing research papers, professionals reviewing lengthy documents, researchers processing multiple texts, and anyone looking to quickly grasp document contents. The award-winning solution demonstrates advanced integration of multiple AI technologies to solve real-world document processing challenges.",
     ],
     image: "/projects/tinker-screenshot.jpg",
@@ -159,10 +159,12 @@ const projects = [
 ];
 
 export function Projects() {
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [selectedProject, setSelectedProject] = useState<
+    (typeof projects)[0] | null
+  >(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleProjectClick = (project: typeof projects[0]) => {
+  const handleProjectClick = (project: (typeof projects)[0]) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
@@ -203,7 +205,10 @@ export function Projects() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer" onClick={() => handleProjectClick(project)}>
+              <Card
+                className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer"
+                onClick={() => handleProjectClick(project)}
+              >
                 <div className="relative h-48 overflow-hidden bg-muted">
                   <Image
                     src={project.image}
@@ -234,7 +239,7 @@ export function Projects() {
                   )}
                   {project.category && (
                     <div className="absolute top-4 left-4 md:max-w-[45%]">
-                      <span className="inline-flex items-center px-3 py-1 bg-secondary border border-border text-secondary-foreground text-xs font-mono font-medium rounded-full whitespace-nowrap md:whitespace-normal">
+                      <span className="inline-flex items-center px-3 py-1 bg-secondary border border-border text-secondary-foreground text-xs font-mono font-medium rounded-full whitespace-nowrap">
                         {project.category}
                       </span>
                     </div>
