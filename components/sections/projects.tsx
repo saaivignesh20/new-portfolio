@@ -226,15 +226,15 @@ export function Projects() {
                     </div>
                   )}
                   {project.featured && (
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 bg-primary text-white text-xs font-mono font-semibold rounded-full">
+                    <div className="absolute top-4 right-4 md:max-w-[45%]">
+                      <span className="inline-flex items-center px-3 py-1 bg-primary text-white text-xs font-mono font-semibold rounded-full whitespace-nowrap md:whitespace-normal">
                         FEATURED
                       </span>
                     </div>
                   )}
                   {project.category && (
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-secondary border border-border text-secondary-foreground text-xs font-mono font-medium rounded-full">
+                    <div className="absolute top-4 left-4 md:max-w-[45%]">
+                      <span className="inline-flex items-center px-3 py-1 bg-secondary border border-border text-secondary-foreground text-xs font-mono font-medium rounded-full whitespace-nowrap md:whitespace-normal">
                         {project.category}
                       </span>
                     </div>
