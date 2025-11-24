@@ -8,8 +8,18 @@ import { useEffect } from "react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { useTheme } from "next-themes";
 import "overlayscrollbars/overlayscrollbars.css";
-import type { Project } from "@/lib/types";
 
+interface Project {
+  title: string;
+  description: string;
+  fullDescription?: string[];
+  image: string;
+  technologies: string[];
+  github: string | null;
+  demo: string | null;
+  featured: boolean;
+  category: string;
+}
 
 interface ProjectModalProps {
   project: Project | null;

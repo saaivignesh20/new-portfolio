@@ -6,7 +6,10 @@
       "Bash(npm run build:*)",
       "Bash(npm uninstall:*)",
       "Bash(npm run dev:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(/tmp/original_projects.tsx)",
+      "Bash(cat:*)",
+      "Bash(/tmp/main_projects_full.tsx)"
     ],
     "deny": [],
     "ask": []

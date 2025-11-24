@@ -1,89 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-
-const skillCategories = [
-  {
-    category: "Frontend",
-    gradientColor: "from-blue-500 to-cyan-500",
-    textColor: "text-blue-500",
-    borderColor: "border-blue-500/30",
-    bgColor: "bg-blue-500/10",
-    hoverBg: "hover:bg-blue-500/20",
-    skills: [
-      "HTML5",
-      "CSS3",
-      "JavaScript",
-      "Angular",
-      "React",
-      "TypeScript",
-    ],
-  },
-  {
-    category: "Backend",
-    gradientColor: "from-green-500 to-emerald-500",
-    textColor: "text-green-500",
-    borderColor: "border-green-500/30",
-    bgColor: "bg-green-500/10",
-    hoverBg: "hover:bg-green-500/20",
-    skills: [
-      "Node.js",
-      "Express.js",
-      "NestJS",
-      "MongoDB",
-      "PostgreSQL",
-      "REST APIs",
-    ],
-  },
-  {
-    category: "Cloud & Tools",
-    gradientColor: "from-purple-500 to-pink-500",
-    textColor: "text-purple-500",
-    borderColor: "border-purple-500/30",
-    bgColor: "bg-purple-500/10",
-    hoverBg: "hover:bg-purple-500/20",
-    skills: [
-      "AWS",
-      "Firebase",
-      "Auth0",
-      "Figma",
-      "Git",
-      "Docker",
-    ],
-  },
-  {
-    category: "AI & Python",
-    gradientColor: "from-orange-500 to-red-500",
-    textColor: "text-orange-500",
-    borderColor: "border-orange-500/30",
-    bgColor: "bg-orange-500/10",
-    hoverBg: "hover:bg-orange-500/20",
-    skills: [
-      "Python",
-      "ChatGPT API",
-      "Groq API",
-      "Streamlit",
-      "Machine Learning",
-      "Data Analysis",
-    ],
-  },
-  {
-    category: "Architecture",
-    gradientColor: "from-yellow-500 to-amber-500",
-    textColor: "text-yellow-500",
-    borderColor: "border-yellow-500/30",
-    bgColor: "bg-yellow-500/10",
-    hoverBg: "hover:bg-yellow-500/20",
-    skills: [
-      "System Design",
-      "Microservices",
-      "IoT Solutions",
-      "Scalable APIs",
-      "Database Design",
-      "Cloud Architecture",
-    ],
-  },
-]
+import { skillCategories } from "@/lib/data/skills"
 
 export function Skills() {
   return (
@@ -115,7 +33,7 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: categoryIndex * 0.1 }}
-              className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
             >
               <div className="mb-6">
                 <div
@@ -134,7 +52,7 @@ export function Skills() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: categoryIndex * 0.1 + skillIndex * 0.05 }}
-                    className={`px-4 py-2 rounded-full border ${category.bgColor} ${category.borderColor} ${category.textColor} ${category.hoverBg} text-sm font-mono font-medium transition-all hover:scale-105`}
+                    className={`px-4 py-2 rounded-full border ${category.bgColor} ${category.borderColor} ${category.textColor} ${category.hoverBg} text-sm font-mono font-medium transition-all duration-200 hover:scale-105`}
                   >
                     {skill}
                   </motion.span>

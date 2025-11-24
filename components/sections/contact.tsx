@@ -1,40 +1,12 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { useState } from "react"
-
-const contactInfo = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "saaivigneshpremanand@gmail.com",
-    href: "mailto:saaivigneshpremanand@gmail.com",
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "Bloomington, IN",
-    href: null,
-  },
-]
-
-const socialLinks = [
-  {
-    name: "GitHub",
-    icon: Github,
-    href: "https://github.com/saaivignesh20",
-  },
-  {
-    name: "LinkedIn",
-    icon: Linkedin,
-    href: "https://www.linkedin.com/in/saai-vignesh-premanand/",
-  },
-]
+import { contactInfo, socialLinks } from "@/lib/data/contact"
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -273,6 +245,8 @@ export function Contact() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 text-sm"
+                      role="status"
+                      aria-live="polite"
                     >
                       Thanks for reaching out! I&apos;ll get back to you soon.
                     </motion.div>
@@ -283,6 +257,8 @@ export function Contact() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm"
+                      role="alert"
+                      aria-live="assertive"
                     >
                       Oops! Something went wrong. Please try again or email me directly.
                     </motion.div>

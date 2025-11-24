@@ -34,6 +34,24 @@ export const metadata: Metadata = {
     "MongoDB",
     "PostgreSQL",
   ],
+  authors: [{ name: "Saai Vignesh Premanand" }],
+  creator: "Saai Vignesh Premanand",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    title: "Saai Vignesh - Full Stack Developer",
+    description: "Full-stack developer with 7 years of experience building modern web applications, AI solutions, and cloud infrastructure.",
+    siteName: "Saai Vignesh Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Saai Vignesh - Full Stack Developer",
+    description: "Full-stack developer with 7 years of experience building modern web applications",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       { url: "/favicon.ico" },
