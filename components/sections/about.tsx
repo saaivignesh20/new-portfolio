@@ -34,17 +34,17 @@ export function About() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-all"
+              transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <highlight.icon className="h-6 w-6 text-primary" />
+              <div className="h-full bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <highlight.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">{highlight.title}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {highlight.description}
+                </p>
               </div>
-              <h3 className="text-lg font-semibold mb-2">{highlight.title}</h3>
-              <p className="text-sm text-muted-foreground">
-                {highlight.description}
-              </p>
             </motion.div>
           ))}
         </div>

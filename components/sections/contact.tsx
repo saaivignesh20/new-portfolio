@@ -133,9 +133,8 @@ export function Contact() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -5 }}
-                    className="w-12 h-12 rounded-lg bg-card border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className="w-12 h-12 rounded-lg bg-card border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-200 shadow-sm"
                   >
                     <social.icon className="h-5 w-5" />
                   </motion.a>

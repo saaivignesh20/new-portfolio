@@ -60,12 +60,11 @@ export function Projects() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
               className="cursor-pointer"
               onClick={() => handleProjectClick(project)}
             >
-              <Card className="h-full flex flex-col group overflow-hidden">
+              <Card className="h-full flex flex-col group overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src={project.image}
