@@ -25,6 +25,6 @@ export const socialLinks: SocialLink[] = [
   {
     name: "LinkedIn",
     icon: Linkedin,
-    href: "https://www.linkedin.com/in/saai-vignesh-premanand/",
+    href: "https://www.linkedin.com/in/saaivigneshp/",
   },
 ];

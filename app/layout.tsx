@@ -40,13 +40,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     title: "Saai Vignesh - Full Stack Developer",
-    description: "Full-stack developer with 7 years of experience building modern web applications, AI solutions, and cloud infrastructure.",
+    description:
+      "Full-stack developer with 7 years of experience building modern web applications, AI solutions, and cloud infrastructure.",
     siteName: "Saai Vignesh Portfolio",
   },
   twitter: {
     card: "summary_large_image",
     title: "Saai Vignesh - Full Stack Developer",
-    description: "Full-stack developer with 7 years of experience building modern web applications",
+    description:
+      "Full-stack developer with 7 years of experience building modern web applications",
   },
   robots: {
     index: true,
@@ -77,7 +79,7 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem={true}
           disableTransitionOnChange
         >

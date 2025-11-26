@@ -179,6 +179,28 @@ h1, h2, h3, h4, h5, h6 {
   width: var(--os-size);
 }
 
+/* iOS Safari hardware acceleration fixes */
+/* Prevent flickering on transform animations */
+[class*="motion"] {
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+}
+
+/* Force hardware acceleration for hover effects */
+[class*="hover:scale"],
+[class*="hover:-translate"] {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+}
+
+/* Improve iOS touch response */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -5,7 +5,7 @@ import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 md:pt-20 relative overflow-hidden">
       {/* Animated triangle glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Top-left blue glow */}
@@ -127,7 +127,7 @@ export function Hero() {
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg border-2 border-primary/20 bg-transparent text-foreground text-base font-medium shadow-[0_4px_0_0_rgba(37,99,235,0.15)] hover:bg-primary/5 hover:border-primary/30 hover:shadow-[0_6px_0_0_rgba(37,99,235,0.15)] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_1px_0_0_rgba(37,99,235,0.15)] active:scale-[0.97] transition-all whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-lg border-2 border-primary/20 bg-background text-foreground text-base font-medium shadow-[0_4px_0_0_rgba(37,99,235,0.15)] hover:bg-primary/5 hover:border-primary/30 hover:shadow-[0_6px_0_0_rgba(37,99,235,0.15)] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_1px_0_0_rgba(37,99,235,0.15)] active:scale-[0.97] transition-all whitespace-nowrap"
               >
                 Contact Me
               </a>
@@ -148,7 +148,7 @@ export function Hero() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://www.linkedin.com/in/saai-vignesh-premanand/"
+                href="https://www.linkedin.com/in/saaivigneshp/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg hover:bg-accent transition-colors"
