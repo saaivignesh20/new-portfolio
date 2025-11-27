@@ -79,7 +79,7 @@ export function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="flex items-center justify-center w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border hover:bg-background hover:border-primary transition-all shadow-sm"
+                        className="flex items-center justify-center w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border hover:bg-background hover:border-primary hover:text-primary transition-all shadow-sm text-white"
                         aria-label="View on GitHub"
                       >
                         <Github className="h-5 w-5" />
